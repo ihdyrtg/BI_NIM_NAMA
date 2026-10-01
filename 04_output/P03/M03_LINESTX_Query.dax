@@ -1,0 +1,15 @@
+DEFINE
+    VAR MonthlySales =
+        SUMMARIZECOLUMNS(
+            'Fact_Sales'[Month_Index],
+            'Fact_Sales'[Month_Start],
+            "MonthlySales", SUM('Fact_Sales'[Revenue])
+        )
+EVALUATE
+    LINESTX(
+        MonthlySales,
+        [MonthlySales],
+        'Fact_Sales'[Month_Index]
+    )
+
+// Benchmark panduan: Slope1 ~ Rp190,528/bulan; Intercept ~ Rp41.71 juta; R^2 ~ 0.048.

@@ -1,0 +1,66 @@
+// =============================================================
+// CANONICAL MEASURES - SumbarMart 360 Practicum 05-07
+// Create on table _Measures unless noted.
+// =============================================================
+
+Total Sales =
+SUM('Fact_Sales'[Revenue])
+
+Total Cost =
+SUM('Fact_Sales'[Cost])
+
+// P05 definition:
+Gross Profit =
+[Total Sales] - [Total Cost]
+
+Profit Margin =
+DIVIDE([Gross Profit], [Total Sales], 0)
+
+Orders =
+DISTINCTCOUNT('Fact_Sales'[Transaction_ID])
+
+Customers =
+CALCULATE(
+    DISTINCTCOUNT('Fact_Sales'[Customer_ID]),
+    'Fact_Sales'[Customer_ID] <> BLANK()
+)
+
+Return Rate =
+DIVIDE(
+    CALCULATE([Orders], 'Fact_Sales'[Return_Flag] = "Ya"),
+    [Orders],
+    0
+)
+
+Avg Satisfaction =
+AVERAGE('Fact_Sales'[Satisfaction_Score])
+
+// P06/P07 use the dataset Profit column directly.
+Total Profit Dataset =
+SUM('Fact_Sales'[Profit])
+
+Profit Margin Dataset =
+DIVIDE([Total Profit Dataset], [Total Sales], 0)
+
+// Critical reconciliation: do not silently assume both profit definitions are identical.
+Profit Reconciliation Delta =
+[Gross Profit] - [Total Profit Dataset]
+
+Sales Target =
+SUM('Fact_Target'[Sales_Target])
+
+Target Achievement % =
+DIVIDE([Total Sales], [Sales Target], 0)
+
+Jumlah Transaksi = [Orders]
+Total Penjualan = [Total Sales]
+Total Laba = [Total Profit Dataset]
+Margin Laba = [Profit Margin Dataset]
+
+Unit Terjual =
+SUM('Fact_Sales'[Quantity])
+
+Rata-rata Kepuasan = [Avg Satisfaction]
+
+Jumlah Retur =
+CALCULATE([Jumlah Transaksi], 'Fact_Sales'[Return_Flag] = "Ya")
