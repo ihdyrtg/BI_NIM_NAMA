@@ -1,3 +1,2 @@
 # 05_article
-
-Folder ini disiapkan untuk artikel/luaran akhir setelah UAS. Praktikum 02-07 belum mewajibkan artikel final, sehingga tidak ada naskah yang difabrikasi.
+Folder ini disiapkan untuk luaran artikel dari proyek BI. Draft template IMRAD tersedia. Isi hasil empiris hanya setelah angka/visual dari PBIX final tervalidasi.

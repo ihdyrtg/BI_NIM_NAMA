@@ -1,0 +1,9 @@
+// Praktikum 04 - custom column setelah Left Outer merge dan expand Branch_Name
+// Branch_Key_Audit
+if [Branch_Name] = null then
+    "Orphan key - tidak ditemukan di Dim_Branch"
+else
+    "Valid"
+
+// Implementasi Unknown/Unmapped: buat row B099 melalui Enter Data lalu append ke reference Dim_Branch.
+// Jangan mengubah B099 menjadi B001-B006 tanpa bukti.

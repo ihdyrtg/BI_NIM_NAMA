@@ -1,0 +1,23 @@
+Total Penjualan =
+SUM(Fact_Sales[Revenue])
+
+Total Laba =
+SUM(Fact_Sales[Profit])
+
+Margin Laba =
+DIVIDE([Total Laba], [Total Penjualan], 0)
+
+Jumlah Transaksi =
+DISTINCTCOUNT(Fact_Sales[Transaction_ID])
+
+Unit Terjual =
+SUM(Fact_Sales[Quantity])
+
+Rata-rata Kepuasan =
+AVERAGE(Fact_Sales[Satisfaction_Score])
+
+Jumlah Retur =
+CALCULATE([Jumlah Transaksi], Fact_Sales[Return_Flag] = "Ya")
+
+Return Rate P07 =
+DIVIDE([Jumlah Retur], [Jumlah Transaksi], 0)

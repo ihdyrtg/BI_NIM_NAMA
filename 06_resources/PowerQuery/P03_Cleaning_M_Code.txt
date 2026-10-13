@@ -1,0 +1,39 @@
+// Praktikum 03 - potongan kode Power Query M
+
+// Channel_Clean
+let
+    c = Text.Lower(Text.Trim(Text.Clean([Channel])))
+in
+    if c = "toko" then "Toko"
+    else if c = "online" then "Online"
+    else if c = "whatsapp" then "WhatsApp"
+    else [Channel]
+
+// Transaction_Date_Clean
+let
+    t = Text.Trim(Text.From([Transaction_Date]))
+in
+    try Date.FromText(t, [Format="dd/MM/yyyy", Culture="en-GB"])
+    otherwise try Date.FromText(t, [Format="yyyy-MM-dd", Culture="en-US"])
+    otherwise null
+
+// Unit_Price_Clean
+if Value.Is([Unit_Price], type text) then
+    Number.FromText(Text.Replace(Text.Replace(Text.Trim([Unit_Price]), "Rp", ""), ".", ""))
+else
+    Number.From([Unit_Price])
+
+// Discount_Pct_Clean
+if Value.Is([Discount_Pct], type text) then
+    Number.FromText(Text.Replace(Text.Trim([Discount_Pct]), "%", "")) / 100
+else
+    Number.From([Discount_Pct])
+
+// Month_Start
+Date.StartOfMonth([Transaction_Date_Clean])
+
+// Month_Year
+Date.ToText([Month_Start], "MMM yyyy", "id-ID")
+
+// Month_Index
+(Date.Year([Transaction_Date_Clean]) - 2024) * 12 + Date.Month([Transaction_Date_Clean])

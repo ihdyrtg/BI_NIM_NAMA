@@ -1,0 +1,15 @@
+// Praktikum 06 - definisi pada modul P06
+Total Sales =
+SUM(Fact_Sales[Revenue])
+
+Gross Profit P06 =
+SUM(Fact_Sales[Profit])
+
+Profit Margin P06 =
+DIVIDE([Gross Profit P06], [Total Sales])
+
+Sales Target =
+SUM(Fact_Target[Sales_Target])
+
+Target Achievement % =
+DIVIDE([Total Sales], [Sales Target])
